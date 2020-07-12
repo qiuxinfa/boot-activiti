@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:tns="http://www.activiti.org/test" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" expressionLanguage="http://www.w3.org/1999/XPath" id="m1594220273205" name="" targetNamespace="http://www.activiti.org/test" typeLanguage="http://www.w3.org/2001/XMLSchema">
+  <process id="timeJobProcess" isClosed="false" isExecutable="true" processType="None">
+    <startEvent id="jobStart" name="开始"/>
+    <userTask activiti:exclusive="true" id="commonTask" name="普通任务"/>
+    <endEvent id="normalEnd" name="正常结束"/>
+    <boundaryEvent attachedToRef="commonTask" cancelActivity="true" id="timeoutBoundary" name="BoundaryEvent">
+      <timerEventDefinition>
+        <timeDuration>PT5S</timeDuration>
+      </timerEventDefinition>
+    </boundaryEvent>
+    <userTask activiti:exclusive="true" id="timeoutTask" name="超时任务"/>
+    <endEvent id="timeoutEnd" name="超时结束"/>
+    <sequenceFlow id="_8" sourceRef="jobStart" targetRef="commonTask"/>
+    <sequenceFlow id="_9" sourceRef="commonTask" targetRef="normalEnd"/>
+    <sequenceFlow id="_10" sourceRef="timeoutBoundary" targetRef="timeoutTask"/>
+    <sequenceFlow id="_11" sourceRef="timeoutTask" targetRef="timeoutEnd"/>
+  </process>
+  <bpmndi:BPMNDiagram documentation="background=#FFFFFF;count=1;horizontalcount=1;orientation=0;width=842.4;height=1195.2;imageableWidth=832.4;imageableHeight=1185.2;imageableX=5.0;imageableY=5.0" id="Diagram-_1" name="New Diagram">
+    <bpmndi:BPMNPlane bpmnElement="timeJobProcess">
+      <bpmndi:BPMNShape bpmnElement="jobStart" id="Shape-jobStart">
+        <omgdc:Bounds height="32.0" width="32.0" x="65.0" y="250.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="commonTask" id="Shape-commonTask">
+        <omgdc:Bounds height="72.0" width="95.0" x="140.0" y="230.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="72.0" width="95.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="normalEnd" id="Shape-normalEnd">
+        <omgdc:Bounds height="32.0" width="32.0" x="330.0" y="250.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="timeoutTask" id="Shape-timeoutTask">
+        <omgdc:Bounds height="55.0" width="85.0" x="195.0" y="405.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="timeoutEnd" id="Shape-timeoutEnd">
+        <omgdc:Bounds height="32.0" width="32.0" x="340.0" y="415.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="timeoutBoundary" id="Shape-timeoutBoundary">
+        <omgdc:Bounds height="32.0" width="32.0" x="185.0" y="270.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="_8" id="BPMNEdge__8" sourceElement="_2" targetElement="_3">
+        <omgdi:waypoint x="97.0" y="266.0"/>
+        <omgdi:waypoint x="140.0" y="266.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_9" id="BPMNEdge__9" sourceElement="_3" targetElement="_4">
+        <omgdi:waypoint x="235.0" y="266.0"/>
+        <omgdi:waypoint x="330.0" y="266.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_11" id="BPMNEdge__11" sourceElement="_6" targetElement="_7">
+        <omgdi:waypoint x="280.0" y="432.5"/>
+        <omgdi:waypoint x="340.0" y="431.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_10" id="BPMNEdge__10" sourceElement="_3" targetElement="_6">
+        <omgdi:waypoint x="175.0" y="302.0"/>
+        <omgdi:waypoint x="175.0" y="350.0"/>
+        <omgdi:waypoint x="195.0" y="432.5"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
