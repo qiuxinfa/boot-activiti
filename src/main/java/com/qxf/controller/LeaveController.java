@@ -127,22 +127,37 @@ public class LeaveController {
         return "已完成审批，结果为： "+msg;
     }
 
-    // 查询请假记录
+    // 我发起的请假流程
     @GetMapping("/myLeave")
     public List<Leave> getMyLeave(){
         String userId = "sam";
         // 用户参与的流程
         List<HistoricProcessInstance> processInstanceList = historyService.createHistoricProcessInstanceQuery()
-                .processDefinitionKey("leaveProcess").involvedUser(userId).list();
+                .processDefinitionKey("leaveProcess").startedBy(userId).list();
         List<Leave> leaveList = new ArrayList<>();
 
         if (processInstanceList != null && processInstanceList.size() > 0){
             for (HistoricProcessInstance instance : processInstanceList){
                 Leave leave = leaveMapper.getLeaveById(instance.getBusinessKey());
-                // 筛选出用户发起的流程
-                if (userId.equals(leave.getUserId())){
-                    leaveList.add(leave);
-                }
+                leaveList.add(leave);
+            }
+        }
+
+        return leaveList;
+    }
+
+    // 我的请假记录
+    @GetMapping("/record")
+    public List<Leave> getMyLeaveRecord(){
+        String userId = "sam";
+        List<HistoricProcessInstance> processInstanceList = historyService.createHistoricProcessInstanceQuery()
+                .processDefinitionKey("leaveProcess").startedBy(userId).finished().list();
+        List<Leave> leaveList = new ArrayList<>();
+
+        if (processInstanceList != null && processInstanceList.size() > 0){
+            for (HistoricProcessInstance instance : processInstanceList){
+                Leave leave = leaveMapper.getLeaveById(instance.getBusinessKey());
+                leaveList.add(leave);
             }
         }
 
